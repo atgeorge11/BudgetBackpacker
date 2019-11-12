@@ -1,7 +1,8 @@
 import React from 'react';
 import { ExpoConfigView } from '@expo/samples';
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text, TextInput } from 'react-native';
 import amadeusAPI from '../config/amadeusAPI';
+import FlightForm from '../Forms/FlightForm';
 
 export default class FlightsScreen extends React.Component {
   constructor(props) {
@@ -11,8 +12,8 @@ export default class FlightsScreen extends React.Component {
     }
   }
 
-  setFlightInfo () {
-    amadeusAPI.getFlightInfoAsync()
+  searchFlightInfo (params) {
+    amadeusAPI.getFlightInfoAsync(params)
     .then((result) => {
       this.setState({
         flightInfo: JSON.stringify(result)
@@ -23,10 +24,7 @@ export default class FlightsScreen extends React.Component {
   render () {
     return (
       <View>
-        <Button
-          title="Click for Flight Info"
-          onPress={this.setFlightInfo.bind(this)}
-        ></Button>
+        <FlightForm searchFlights={this.searchFlightInfo.bind(this)}/>
         <Text>{this.state.flightInfo}</Text>
       </View>
       )

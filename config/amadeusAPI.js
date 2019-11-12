@@ -1,8 +1,19 @@
 import config from './config';
+import formatDate from './formatDate';
 
-async function getFlightInfoAsync() {
-    try {
-        let response = await fetch("https://test.api.amadeus.com/v1/shopping/flight-offers?origin=NYC&destination=MAD&departureDate=2020-10-01&max=2", {
+async function getFlightInfoAsync(params) {
+    let url = "https://test.api.amadeus.com/v1/shopping/flight-offers"
+        + "?origin=" + params.origin
+        + "&destination=" + params.destination
+        + "&departureDate=" + formatDate(params.departureDate)
+        + "&adults=" + params.adults
+        + "&children=" + params.children
+        + "&infants=" + params.infants
+        + "&seniors=" + params.seniors
+        + "&maxPrice=" + params.maxPrice
+        + "&max=" + params.max;
+     try {
+        let response = await fetch(url, {
             method: "GET",
             headers: {
                 Authorization: "Bearer " + config.API_TOKEN
