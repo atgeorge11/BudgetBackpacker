@@ -10,7 +10,8 @@ async function getFlightInfoAsync(params) {
         + "&children=" + params.children
         + "&infants=" + params.infants
         + "&seniors=" + params.seniors
-        + "&maxPrice=" + params.maxPrice
+        + "&maxPrice=" + params.maxPrice.substring(1);
+        + "&currency=USD"
         + "&max=" + params.max;
      try {
         let response = await fetch(url, {
