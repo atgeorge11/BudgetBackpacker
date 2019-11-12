@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, View, Text } from 'react-native';
 import FlightConnectionItem from './FlightConnectionItem';
+import formatDate from './formatDate';
 
 export default FlightItem = props => {
     let flightRecord = {
@@ -35,10 +36,14 @@ export default FlightItem = props => {
                 <Text>{flightRecord.price}</Text>
             </View>
             <View>
-                <Text>{flightRecord.departure.airport + " " 
-                    + flightRecord.departure.time + "-" 
-                    + flightRecord.arrival.airport + " "
-                    + flightRecord.arrival.time}</Text>  
+                <View>
+                    <Text>Departure: {flightRecord.departure.airport}</Text>
+                    <Text>{formatDate(flightRecord.departure.time)}</Text>
+                </View>
+                <View>
+                    <Text>Arrival: {flightRecord.arrival.airport}</Text>
+                    <Text>{formatDate(flightRecord.arrival.time)}</Text>
+                </View>
             </View>
             {flightRecord.connections.map((item, index) => {
                 return (

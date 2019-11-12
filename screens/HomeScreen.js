@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Button,
   Image,
+  ImageBackground,
   Platform,
   ScrollView,
   StyleSheet,
@@ -20,6 +21,15 @@ export default function HomeScreen() {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
+
+          <ImageBackground
+            style={{
+              width: "100%",
+              height: "100%",
+              background: "linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(255, 0, 0, 1) 70%, rgba(255, 0, 0, 1) 100%"
+            }}
+            source={{uri: "https://travelphotos.s3.us-east-2.amazonaws.com/amsterdam-netherlands-canal.jpg"}}
+          />
 
         <View style={styles.getStartedContainer}>
 

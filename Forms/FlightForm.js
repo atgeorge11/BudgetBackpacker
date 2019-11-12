@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, View, Text, TextInput, DatePickerIOS, Picker, Modal } from 'react-native';
+import { Button, View, Text, TextInput, StyleSheet, Modal, TouchableOpacity } from 'react-native';
 import DatePicker from './Helpers/DatePicker';
 import NumberPicker from './Helpers/NumberPicker';
 import PricePicker from './Helpers/PricePicker';
+import formatDate from './Helpers/formatDate';
 
 export default class FlightForm extends React.Component {
     constructor(props) {
@@ -108,42 +109,45 @@ export default class FlightForm extends React.Component {
 
     render () {
         return (
-            <View>
+            <View style={styles.container}>
                 <View>
-                    <Text>City of Departure</Text>
+                    <Text style={styles.h1}>City of Departure</Text>
                     <TextInput
-                        style={{height: 40}}
+                        style={styles.inputField}
                         placeholder="City of Departure"
                         onChangeText={text => this.setState({origin: text})}
                         value={this.state.origin}
                     ></TextInput>
-                    <Text>City of Arrival</Text>
+                    <Text style={styles.h1}>City of Arrival</Text>
                     <TextInput
-                        style={{height: 40}}
+                        style={styles.inputField}
                         placeholder="City of Arrival"
                         onChangeText={text => this.setState({destination: text})}
                         value={this.state.destination}
                     ></TextInput>
                 </View>
                 <View>
-                    <Text>Departure Date</Text>
-                    <Text>{this.state.departureDate.toString()}</Text>
-                    <Modal
-                        visible={this.state.dateModalVisible}
-                        animationType={'slide'}
-                        onRequestClose={() => this.closeDateModal()}
-                    >
-                        <DatePicker submitDate={this.submitDate.bind(this)}/>
-                    </Modal>
-                    <Button
-                        title="Change"
+                    <Text style={styles.h1}>Departure Date</Text>
+                    <TouchableOpacity
                         onPress={this.openDateModal.bind(this)}
-                    ></Button>
+                        style={styles.inputField}
+                    >
+                        <Text>{formatDate(this.state.departureDate.toString())}</Text>
+                    </TouchableOpacity>
+                        <Modal
+                            visible={this.state.dateModalVisible}
+                            animationType={'slide'}
+                            onRequestClose={() => this.closeDateModal()}
+                        >
+                    <DatePicker submitDate={this.submitDate.bind(this)}/>
+                </Modal>     
                 </View>
                 <View>
                     <View>
-                        <Text>Adult Passengers</Text>
-                        <Text>{this.state.adults}</Text>
+                        <Text style={styles.h2}>Adult Passengers</Text>
+                        <TouchableOpacity onPress={() => this.openNumberModal("adults")}>
+                            <Text>{this.state.adults}</Text>
+                        </TouchableOpacity>
                         <Modal
                             visible={this.state.adultsModalVisible}
                             animationType={'slide'}
@@ -151,14 +155,12 @@ export default class FlightForm extends React.Component {
                         >
                             <NumberPicker submitNumber={this.submitNumber.bind(this)} passenger="adults" />
                         </Modal>
-                        <Button
-                            title="Change"
-                            onPress={() => this.openNumberModal("adults")}
-                        />
                     </View>
                     <View>
-                        <Text>Child Passengers</Text>
-                        <Text>{this.state.children}</Text>
+                        <Text style={styles.h2}>Child Passengers</Text>
+                        <TouchableOpacity onPress={() => this.openNumberModal("children")}>
+                            <Text>{this.state.children}</Text>
+                        </TouchableOpacity>
                         <Modal
                             visible={this.state.childrenModalVisible}
                             animationType={'slide'}
@@ -166,14 +168,12 @@ export default class FlightForm extends React.Component {
                         >
                             <NumberPicker submitNumber={this.submitNumber.bind(this)} passenger="children" />
                         </Modal>
-                        <Button
-                            title="Change"
-                            onPress={() => this.openNumberModal("children")}
-                        />
                     </View>
                     <View>
-                        <Text>Infant Passengers</Text>
-                        <Text>{this.state.infants}</Text>
+                        <Text style={styles.h2}>Infant Passengers</Text>
+                        <TouchableOpacity onPress={() => this.openNumberModal("infants")}>
+                            <Text>{this.state.infants}</Text>
+                        </TouchableOpacity>
                         <Modal
                             visible={this.state.infantsModalVisible}
                             animationType={'slide'}
@@ -181,14 +181,12 @@ export default class FlightForm extends React.Component {
                         >
                             <NumberPicker submitNumber={this.submitNumber.bind(this)} passenger="infants" />
                         </Modal>
-                        <Button
-                            title="Change"
-                            onPress={() => this.openNumberModal("infants")}
-                        />
                     </View>
                     <View>
-                        <Text>Senior Passengers</Text>
-                        <Text>{this.state.seniors}</Text>
+                        <Text style={styles.h2}>Senior Passengers</Text>
+                        <TouchableOpacity onPress={() => this.openNumberModal("seniors")}>
+                            <Text>{this.state.seniors}</Text>
+                        </TouchableOpacity>
                         <Modal
                             visible={this.state.seniorsModalVisible}
                             animationType={'slide'}
@@ -196,14 +194,10 @@ export default class FlightForm extends React.Component {
                         >
                             <NumberPicker submitNumber={this.submitNumber.bind(this)} passenger="seniors" />
                         </Modal>
-                        <Button
-                            title="Change"
-                            onPress={() => this.openNumberModal("seniors")}
-                        />
                     </View>
                 </View>
                 <View>
-                    <Text>Max Price</Text>
+                    <Text style={styles.h1}>Max Price</Text>
                     <Text>{this.state.maxPrice}</Text>
                     <Modal
                         visible={this.state.priceModalVisible}
@@ -225,3 +219,26 @@ export default class FlightForm extends React.Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        margin: 10
+    },
+    h1: {
+        fontSize: 20,
+        color: "lightblue",
+        fontWeight: "bold"
+    },
+    h2: {
+        fontSize: 15,
+        color: "lightblue",
+        fontWeight: "bold"
+    },
+    inputField: {
+        fontSize: 15,
+        padding: 15,
+        borderStyle: "solid",
+        borderColor: "black"
+    }
+
+})

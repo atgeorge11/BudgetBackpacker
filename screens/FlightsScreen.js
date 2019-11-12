@@ -1,6 +1,6 @@
 import React from 'react';
 import { ExpoConfigView } from '@expo/samples';
-import { Button, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { Button, View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import amadeusAPI from '../config/amadeusAPI';
 import FlightForm from '../Forms/FlightForm';
 import FlightDisplays from '../Displays/FlightDisplays';
@@ -17,11 +17,24 @@ export default class FlightsScreen extends React.Component {
   searchFlightInfo (params) {
     amadeusAPI.getFlightInfoAsync(params)
     .then((result) => {
-      this.switchDisplayForm();
-      this.setState({
-        flightInfo: result[1].data
-      })
+      if (result[1].data[0]) {
+        this.switchDisplayForm();
+        this.setState({
+          flightInfo: result[1].data
+        })
+      } else {
+        Alert.alert(
+          "Bad Request",
+          "Unable to retrieve data.\n" + result[1].data + " was retrieved.",
+        )
+      }
     })
+    .catch (err => {
+      Alert.alert(
+        "Bad Request",
+        "Encoutnered error: " + err
+      )
+    });
   }
 
   switchDisplayForm() {
@@ -32,15 +45,17 @@ export default class FlightsScreen extends React.Component {
 
   render () {
     return (
-      <View>
+      <View style={styles.container}>
+        <View style={styles.flightFormContainer}>
         <TouchableOpacity
           onPress={this.switchDisplayForm.bind(this)}
+          style={styles.flightFormTitle}
         >
-          <Text>Search for a Flight</Text>
+          <Text style={styles.flightFormTitleText}>Flight Search</Text>
         </TouchableOpacity>
-        {this.state.displayForm ? (<FlightForm searchFlights={this.searchFlightInfo.bind(this)}/>) : null}
+        {this.state.displayForm ? (<FlightForm searchFlights={this.searchFlightInfo.bind(this)} style={styles.flightForm}/>) : null}
+        </View>
         <FlightDisplays items={this.state.flightInfo}/>
-        {/* <Text>{"INFO: " + JSON.stringify(this.state.flightInfo)}</Text> */}
       </View>
       )
   }
@@ -49,5 +64,29 @@ export default class FlightsScreen extends React.Component {
 }
 
 FlightsScreen.navigationOptions = {
-  title: 'app.json',
+  title: 'BudgetBackpacker',
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "lightblue",
+  },
+  flightFormContainer: {
+    margin: 10,
+    backgroundColor: "white",
+    borderRadius: 10,
+    overflow: "hidden"
+  },
+  flightFormTitle: {
+    margin: 15,
+  },
+  flightFormTitleText: {
+    color: "lightblue",
+    fontSize: 25,
+    fontWeight: "bold"
+  },
+  flightForm: {
+    margin: 10
+  }
+});
