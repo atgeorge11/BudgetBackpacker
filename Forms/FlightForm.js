@@ -4,6 +4,7 @@ import DatePicker from './Helpers/DatePicker';
 import NumberPicker from './Helpers/NumberPicker';
 import PricePicker from './Helpers/PricePicker';
 import formatDate from './Helpers/formatDate';
+import { whileStatement } from '@babel/types';
 
 export default class FlightForm extends React.Component {
     constructor(props) {
@@ -110,7 +111,7 @@ export default class FlightForm extends React.Component {
     render () {
         return (
             <View style={styles.container}>
-                <View>
+                <View style={styles.subContainer}>
                     <Text style={styles.h1}>City of Departure</Text>
                     <TextInput
                         style={styles.inputField}
@@ -118,6 +119,8 @@ export default class FlightForm extends React.Component {
                         onChangeText={text => this.setState({origin: text})}
                         value={this.state.origin}
                     ></TextInput>
+                </View>
+                <View style={styles.subContainer}>
                     <Text style={styles.h1}>City of Arrival</Text>
                     <TextInput
                         style={styles.inputField}
@@ -126,7 +129,7 @@ export default class FlightForm extends React.Component {
                         value={this.state.destination}
                     ></TextInput>
                 </View>
-                <View>
+                <View style={styles.subContainer}>
                     <Text style={styles.h1}>Departure Date</Text>
                     <TouchableOpacity
                         onPress={this.openDateModal.bind(this)}
@@ -142,79 +145,101 @@ export default class FlightForm extends React.Component {
                     <DatePicker submitDate={this.submitDate.bind(this)}/>
                 </Modal>     
                 </View>
-                <View>
-                    <View>
-                        <Text style={styles.h2}>Adult Passengers</Text>
-                        <TouchableOpacity onPress={() => this.openNumberModal("adults")}>
-                            <Text>{this.state.adults}</Text>
-                        </TouchableOpacity>
-                        <Modal
-                            visible={this.state.adultsModalVisible}
-                            animationType={'slide'}
-                            onRequestClose={() => this.closeNumberModal("adults")}
-                        >
-                            <NumberPicker submitNumber={this.submitNumber.bind(this)} passenger="adults" />
-                        </Modal>
+                <View style={styles.subContainer}>
+                    <Text style={styles.h1}>Passengers</Text>
+                    <View style={styles.passengersField}>
+                        <View style={styles.flex1}>
+                            <Text style={styles.h2}>Adult Passengers</Text>
+                        </View>
+                        <View style={styles.flex1}>
+                            <TouchableOpacity onPress={() => this.openNumberModal("adults")}>
+                                <Text style={styles.passengersInputText}>{this.state.adults}</Text>
+                            </TouchableOpacity>
+                            <Modal
+                                visible={this.state.adultsModalVisible}
+                                animationType={'slide'}
+                                onRequestClose={() => this.closeNumberModal("adults")}
+                            >
+                                <NumberPicker submitNumber={this.submitNumber.bind(this)} passenger="adults" />
+                            </Modal>
+                        </View>
                     </View>
-                    <View>
-                        <Text style={styles.h2}>Child Passengers</Text>
-                        <TouchableOpacity onPress={() => this.openNumberModal("children")}>
-                            <Text>{this.state.children}</Text>
-                        </TouchableOpacity>
-                        <Modal
-                            visible={this.state.childrenModalVisible}
-                            animationType={'slide'}
-                            onRequestClose={() => this.closeNumberModal("children")}
-                        >
-                            <NumberPicker submitNumber={this.submitNumber.bind(this)} passenger="children" />
-                        </Modal>
+                    <View style={styles.passengersField}>
+                        <View style={styles.flex1}>
+                            <Text style={styles.h2}>Child Passengers</Text>
+                        </View>
+                        <View style={styles.flex1}>
+                            <TouchableOpacity onPress={() => this.openNumberModal("children")}>
+                                <Text style={styles.passengersInputText}>{this.state.children}</Text>
+                            </TouchableOpacity>
+                            <Modal
+                                visible={this.state.childrenModalVisible}
+                                animationType={'slide'}
+                                onRequestClose={() => this.closeNumberModal("children")}
+                            >
+                                <NumberPicker submitNumber={this.submitNumber.bind(this)} passenger="children" />
+                            </Modal>
+                        </View>
                     </View>
-                    <View>
-                        <Text style={styles.h2}>Infant Passengers</Text>
-                        <TouchableOpacity onPress={() => this.openNumberModal("infants")}>
-                            <Text>{this.state.infants}</Text>
-                        </TouchableOpacity>
-                        <Modal
-                            visible={this.state.infantsModalVisible}
-                            animationType={'slide'}
-                            onRequestClose={() => this.closeNumberModal("infants")}
-                        >
-                            <NumberPicker submitNumber={this.submitNumber.bind(this)} passenger="infants" />
-                        </Modal>
+                    <View style={styles.passengersField}>
+                        <View style={styles.flex1}>
+                            <Text style={styles.h2}>Infant Passengers</Text>
+                        </View>
+                        <View style={styles.flex1}>
+                            <TouchableOpacity onPress={() => this.openNumberModal("infants")}>
+                                <Text style={styles.passengersInputText}>{this.state.infants}</Text>
+                            </TouchableOpacity>
+                            <Modal
+                                visible={this.state.infantsModalVisible}
+                                animationType={'slide'}
+                                onRequestClose={() => this.closeNumberModal("infants")}
+                            >
+                                <NumberPicker submitNumber={this.submitNumber.bind(this)} passenger="infants" />
+                            </Modal>
+                        </View>
                     </View>
-                    <View>
-                        <Text style={styles.h2}>Senior Passengers</Text>
-                        <TouchableOpacity onPress={() => this.openNumberModal("seniors")}>
-                            <Text>{this.state.seniors}</Text>
-                        </TouchableOpacity>
-                        <Modal
-                            visible={this.state.seniorsModalVisible}
-                            animationType={'slide'}
-                            onRequestClose={() => this.closeNumberModal("seniors")}
-                        >
-                            <NumberPicker submitNumber={this.submitNumber.bind(this)} passenger="seniors" />
-                        </Modal>
+                    <View style={styles.passengersField}>
+                        <View style={styles.flex1}>
+                            <Text style={styles.h2}>Senior Passengers</Text>
+                        </View>
+                        <View style={styles.flex1}>
+                            <TouchableOpacity onPress={() => this.openNumberModal("seniors")}>
+                                <Text style={styles.passengersInputText}>{this.state.seniors}</Text>
+                            </TouchableOpacity>
+                            <Modal
+                                visible={this.state.seniorsModalVisible}
+                                animationType={'slide'}
+                                onRequestClose={() => this.closeNumberModal("seniors")}
+                            >
+                                <NumberPicker submitNumber={this.submitNumber.bind(this)} passenger="seniors" />
+                            </Modal>
+                        </View>
                     </View>
                 </View>
-                <View>
-                    <Text style={styles.h1}>Max Price</Text>
-                    <Text>{this.state.maxPrice}</Text>
-                    <Modal
-                        visible={this.state.priceModalVisible}
-                        animationType={"slide"}
-                        onRequestClose={() => this.closePriceModal()}
-                    >
-                        <PricePicker submitPrice={this.submitPrice.bind(this)}/>
-                    </Modal>
-                    <Button
-                        title="Change"
-                        onPress={() => this.openPriceModal()}
-                    />
+                <View style={styles.subContainer}>
+                    <View style={styles.maxPrice}>
+                        <View style={styles.flex1}>
+                            <Text style={styles.h1}>Max Price</Text>
+                        </View>
+                        <View style={styles.flex1}>
+                            <TouchableOpacity onPress={() => this.openPriceModal()}>
+                                <Text style={styles.maxPriceInput}>{this.state.maxPrice}</Text>
+                            </TouchableOpacity>
+                            <Modal
+                                visible={this.state.priceModalVisible}
+                                animationType={"slide"}
+                                onRequestClose={() => this.closePriceModal()}
+                            >
+                                <PricePicker submitPrice={this.submitPrice.bind(this)}/>
+                            </Modal>
+                        </View>
+                    </View>
                 </View>
-                <Button
-                    title="Click to Search for Flights"
-                    onPress={() => this.props.searchFlights(this.state)}
-                />
+                <TouchableOpacity onPress={() => this.props.searchFlights(this.state)}>
+                    <View style={styles.submitButton}>
+                        <Text style={styles.submitButtonText}>Press to Search for Flights</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -224,10 +249,13 @@ const styles = StyleSheet.create({
     container: {
         margin: 10
     },
+    subContainer: {
+        padding: 10
+    },
     h1: {
         fontSize: 20,
         color: "lightblue",
-        fontWeight: "bold"
+        fontWeight: "bold",
     },
     h2: {
         fontSize: 15,
@@ -236,9 +264,40 @@ const styles = StyleSheet.create({
     },
     inputField: {
         fontSize: 15,
-        padding: 15,
+        paddingTop: 10,
+        paddingLeft: 10,
         borderStyle: "solid",
         borderColor: "black"
+    },
+    passengersField: {
+        flexDirection: "row",
+        padding: 5,
+        paddingLeft: 15
+    },
+    flex1: {
+        flex: 1
+    },
+    passengersInputText: {
+        textAlign: "center",
+    },
+    maxPrice: {
+        flexDirection: "row",
+        paddingBottom: 20
+    },
+    maxPriceInput: {
+        textAlign: "center",
+        fontSize: 18
+    },
+    submitButton: {
+        padding: 10,
+        backgroundColor: "lightblue",
+        borderRadius: 10
+    },
+    submitButtonText: {
+        color: "white",
+        fontSize: 20,
+        fontWeight: "bold",
+        textAlign: "center"
     }
 
 })
