@@ -149,7 +149,7 @@ export default class FlightForm extends React.Component {
                     <Text style={styles.h1}>Passengers</Text>
                     <View style={styles.passengersField}>
                         <View style={styles.flex1}>
-                            <Text style={styles.h2}>Adult Passengers</Text>
+                            <Text style={styles.h2}>Adults</Text>
                         </View>
                         <View style={styles.flex2}>
                             <TouchableOpacity onPress={() => this.openNumberModal("adults")}>
@@ -166,7 +166,7 @@ export default class FlightForm extends React.Component {
                     </View>
                     <View style={styles.passengersField}>
                         <View style={styles.flex1}>
-                            <Text style={styles.h2}>Child Passengers</Text>
+                            <Text style={styles.h2}>Children</Text>
                         </View>
                         <View style={styles.flex2}>
                             <TouchableOpacity onPress={() => this.openNumberModal("children")}>
@@ -183,7 +183,7 @@ export default class FlightForm extends React.Component {
                     </View>
                     <View style={styles.passengersField}>
                         <View style={styles.flex1}>
-                            <Text style={styles.h2}>Infant Passengers</Text>
+                            <Text style={styles.h2}>Infants</Text>
                         </View>
                         <View style={styles.flex2}>
                             <TouchableOpacity onPress={() => this.openNumberModal("infants")}>
@@ -200,7 +200,7 @@ export default class FlightForm extends React.Component {
                     </View>
                     <View style={styles.passengersField}>
                         <View style={styles.flex1}>
-                            <Text style={styles.h2}>Senior Passengers</Text>
+                            <Text style={styles.h2}>Seniors</Text>
                         </View>
                         <View style={styles.flex2}>
                             <TouchableOpacity onPress={() => this.openNumberModal("seniors")}>

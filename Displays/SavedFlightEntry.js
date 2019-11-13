@@ -11,7 +11,7 @@ export default SavedFlightEntry = props => {
     return (
         <TouchableOpacity
             onPress={() => {
-                Alert.alert("Delete", "Delete this event?", [
+                Alert.alert("Delete this event?", null, [
                     {text: "Cancel", style: "cancel"},
                     {text: "Okay", onPress: () => {
                         saveFunctions.deleteRecord(props.item.id, (err) => {
@@ -23,7 +23,10 @@ export default SavedFlightEntry = props => {
             }}
         >
         <View style={styles.container}>
+        <Text style={styles.dateText}>{departDate}</Text>
+        <View style={styles.subContainer}>
             <View style={styles.airline}>
+
                 <Text style={styles.airlineText}>{props.item.carrierCode}</Text>
             </View>
             <View style={styles.info}>
@@ -39,6 +42,7 @@ export default SavedFlightEntry = props => {
                 </View>
             </View>
         </View>
+        </View>
         </TouchableOpacity>
 
     )
@@ -47,38 +51,50 @@ export default SavedFlightEntry = props => {
 const styles = StyleSheet.create({
     container: {
         margin: 15,
-        backgroundColor: "lightblue",
+        backgroundColor: "#35A8FF",
         borderRadius: 10,
+    },
+    subContainer: {
         flexDirection: "row"
     },
     info: {
         margin: 10,
         padding: 10,
+        paddingLeft: 2,
         backgroundColor: "white",
         borderRadius: 10,
         flex: 8
     },
     airline: {
         flex: 1,
-        margin: 10
+        margin: 10,
+        marginRight: 2
     },
     airlineText: {
+        textAlign: "center",
         color: "white",
         fontSize: 15,
         fontWeight: "bold"
     },
-    line1: {
-
+    dateText: {
+        paddingTop: 5,
+        paddingLeft: 5,
+        color: "white",
+        fontSize: 17,
+        fontWeight: "bold"
     },
-    line1Text: {
-        fontSize: 18,
-        fontWeight: "bold",
+    line1: {
+        marginLeft: 10
     },
     line2: {
-        marginLeft: 20
+        marginLeft: 10
+    },
+    line1Text: {
+        fontSize: 15,
+        fontWeight: "bold",
     },
     line2Text: {
-        fontSize: 15,
+        fontSize: 12,
         fontWeight: "bold"
     }
 

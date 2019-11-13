@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   refresh: {
-    backgroundColor: "#35A8FF",
+    backgroundColor: "lightblue",
     flex: 1,
     margin: 15,
     padding: 10,
