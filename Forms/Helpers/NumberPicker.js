@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, View, Picker } from 'react-native';
+import { Button, View, Picker, StyleSheet } from 'react-native';
 
 export default class NumberPicker extends React.Component {
     constructor (props) {
@@ -11,7 +11,8 @@ export default class NumberPicker extends React.Component {
 
     render () {
         return (
-            <View>
+            <View style={styles.container}>
+            <View style={styles.subContainer}>
                 <Picker
                     selectedValue={this.state.value}
                     onValueChange={item => {this.setState({value: item})}}>
@@ -32,6 +33,18 @@ export default class NumberPicker extends React.Component {
                     title="Submit"
                 />
             </View>
+            </View>
+
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: "lightblue",
+        flex: 1,
+    },
+    subContainer: {
+        marginTop: 200
+    }
+})

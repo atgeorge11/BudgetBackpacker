@@ -151,7 +151,7 @@ export default class FlightForm extends React.Component {
                         <View style={styles.flex1}>
                             <Text style={styles.h2}>Adult Passengers</Text>
                         </View>
-                        <View style={styles.flex1}>
+                        <View style={styles.flex2}>
                             <TouchableOpacity onPress={() => this.openNumberModal("adults")}>
                                 <Text style={styles.passengersInputText}>{this.state.adults}</Text>
                             </TouchableOpacity>
@@ -168,7 +168,7 @@ export default class FlightForm extends React.Component {
                         <View style={styles.flex1}>
                             <Text style={styles.h2}>Child Passengers</Text>
                         </View>
-                        <View style={styles.flex1}>
+                        <View style={styles.flex2}>
                             <TouchableOpacity onPress={() => this.openNumberModal("children")}>
                                 <Text style={styles.passengersInputText}>{this.state.children}</Text>
                             </TouchableOpacity>
@@ -185,7 +185,7 @@ export default class FlightForm extends React.Component {
                         <View style={styles.flex1}>
                             <Text style={styles.h2}>Infant Passengers</Text>
                         </View>
-                        <View style={styles.flex1}>
+                        <View style={styles.flex2}>
                             <TouchableOpacity onPress={() => this.openNumberModal("infants")}>
                                 <Text style={styles.passengersInputText}>{this.state.infants}</Text>
                             </TouchableOpacity>
@@ -202,7 +202,7 @@ export default class FlightForm extends React.Component {
                         <View style={styles.flex1}>
                             <Text style={styles.h2}>Senior Passengers</Text>
                         </View>
-                        <View style={styles.flex1}>
+                        <View style={styles.flex2}>
                             <TouchableOpacity onPress={() => this.openNumberModal("seniors")}>
                                 <Text style={styles.passengersInputText}>{this.state.seniors}</Text>
                             </TouchableOpacity>
@@ -221,7 +221,7 @@ export default class FlightForm extends React.Component {
                         <View style={styles.flex1}>
                             <Text style={styles.h1}>Max Price</Text>
                         </View>
-                        <View style={styles.flex1}>
+                        <View style={styles.flex2}>
                             <TouchableOpacity onPress={() => this.openPriceModal()}>
                                 <Text style={styles.maxPriceInput}>{this.state.maxPrice}</Text>
                             </TouchableOpacity>
@@ -247,27 +247,29 @@ export default class FlightForm extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        margin: 10
+        margin: 10,
+        backgroundColor: "whitesmoke"
     },
     subContainer: {
-        padding: 10
+        padding: 10,
+        backgroundColor: "whitesmoke"
     },
     h1: {
         fontSize: 20,
-        color: "lightblue",
+        color: "#35A8FF",
         fontWeight: "bold",
     },
     h2: {
         fontSize: 15,
-        color: "lightblue",
+        color: "#35A8FF",
         fontWeight: "bold"
     },
     inputField: {
         fontSize: 15,
         paddingTop: 10,
         paddingLeft: 10,
-        borderStyle: "solid",
-        borderColor: "black"
+        backgroundColor: "white",
+        borderRadius: 5
     },
     passengersField: {
         flexDirection: "row",
@@ -276,6 +278,13 @@ const styles = StyleSheet.create({
     },
     flex1: {
         flex: 1
+    },
+    flex2: {
+        flex: 1,
+        padding: 5,
+        paddingLeft: 10,
+        backgroundColor: "white",
+        borderRadius: 5
     },
     passengersInputText: {
         textAlign: "center",
@@ -290,7 +299,7 @@ const styles = StyleSheet.create({
     },
     submitButton: {
         padding: 10,
-        backgroundColor: "lightblue",
+        backgroundColor: "#35A8FF",
         borderRadius: 10
     },
     submitButtonText: {

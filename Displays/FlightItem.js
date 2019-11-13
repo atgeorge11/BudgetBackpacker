@@ -61,11 +61,11 @@ export default FlightItem = props => {
                     </View>
                     <View style={styles.lines}>
                         <View style={styles.subLine}>
-                            <Text style={styles.subLine1}>Departure: {flightRecord.departure.airport}</Text>
+                            <Text style={styles.subLine1}>Departure: {flightRecord.departure.airport}  </Text>
                             <Text style={styles.subLine2}>{formatDate(flightRecord.departure.time)}</Text>
                         </View>
                         <View style={styles.subLine}>
-                            <Text style={styles.subLine1}>Arrival: {flightRecord.arrival.airport}</Text>
+                            <Text style={styles.subLine1}>Arrival: {flightRecord.arrival.airport}  </Text>
                             <Text style={styles.subLine2}>{formatDate(flightRecord.arrival.time)}</Text>
                         </View>
                     </View>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     },
     price: {
         flex: 1,
-        color: "lightblue",
+        color: "#35A8FF",
         fontSize: 20,
         fontWeight: "bold"
     },

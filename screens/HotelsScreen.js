@@ -22,14 +22,14 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     margin: 10,
-    backgroundColor: "white",
+    backgroundColor: "whitesmoke",
     borderRadius: 10,
     flex: 1
   },
   text: {
     marginTop: 200,
     textAlign: "center",
-    color: "lightblue",
+    color: "#35A8FF",
     fontSize: 20,
     fontWeight: "bold"
   }

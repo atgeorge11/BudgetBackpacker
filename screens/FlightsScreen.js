@@ -2,6 +2,7 @@ import React from 'react';
 import { ExpoConfigView } from '@expo/samples';
 import { Button, View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import amadeusAPI from '../config/amadeusAPI';
+import iapiAPI from '../config/iapaAPI';
 import FlightForm from '../Forms/FlightForm';
 import FlightDisplays from '../Displays/FlightDisplays';
 
@@ -15,7 +16,17 @@ export default class FlightsScreen extends React.Component {
   }
 
   searchFlightInfo (params) {
-    amadeusAPI.getFlightInfoAsync(params)
+    iapiAPI.getCityCodeAsync(params.origin)
+    .then(result => {
+      console.log(result);
+      params.origin = result;
+      return iapiAPI.getCityCodeAsync(params.destination)
+    })
+    .then(result => {
+      console.log(result);
+      params.destination = result;
+      return amadeusAPI.getFlightInfoAsync(params)
+    })
     .then((result) => {
       if (result[1].data[0]) {
         this.switchDisplayForm();
@@ -82,7 +93,7 @@ const styles = StyleSheet.create({
     margin: 15,
   },
   flightFormTitleText: {
-    color: "lightblue",
+    color: "#35A8FF",
     fontSize: 25,
     fontWeight: "bold"
   },
