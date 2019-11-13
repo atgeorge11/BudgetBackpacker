@@ -10,6 +10,7 @@ async function getCityCode(city) {
         })
         let responseJson = await response.json();
         let cityCode = responseJson.cities[0].codeIataCity;
+        console.log(cityCode)
         return cityCode
 
     } catch (err) {

@@ -11,39 +11,44 @@ export default class FlightsScreen extends React.Component {
     super(props);
     this.state = {
       flightInfo: [],
-      displayForm: true
+      displayForm: true,
+      displayLoading: false
     }
   }
 
   searchFlightInfo (params) {
+    this.switchDisplayForm();
+    this.switchDisplayLoading();
+    this.setState({
+      flightInfo: []
+    })
     iapiAPI.getCityCodeAsync(params.origin)
     .then(result => {
-      console.log(result);
       params.origin = result;
       return iapiAPI.getCityCodeAsync(params.destination)
     })
     .then(result => {
-      console.log(result);
       params.destination = result;
       return amadeusAPI.getFlightInfoAsync(params)
     })
     .then((result) => {
-      if (result[1].data[0]) {
-        this.switchDisplayForm();
+      if (result[1].data) {
         this.setState({
-          flightInfo: result[1].data
+          flightInfo: result[1].data,
+          displayLoading: false
         })
       } else {
-        Alert.alert(
-          "Bad Request",
-          "Unable to retrieve data.\n" + result[1].data + " was retrieved.",
-        )
+        this.setState({
+          flightInfo: "No flights found.",
+          displayLoading: false
+        })
       }
     })
     .catch (err => {
+      this.switchDisplayLoading();
       Alert.alert(
         "Bad Request",
-        "Encoutnered error: " + err
+        "Encountered error: " + err
       )
     });
   }
@@ -51,6 +56,13 @@ export default class FlightsScreen extends React.Component {
   switchDisplayForm() {
     this.setState({
       displayForm: !this.state.displayForm
+    })
+  }
+
+  switchDisplayLoading() {
+    console.log(!this.state.displayLoading)
+    this.setState({
+      displayLoading: !this.state.displayLoading
     })
   }
 
@@ -65,8 +77,9 @@ export default class FlightsScreen extends React.Component {
           <Text style={styles.flightFormTitleText}>Flight Search</Text>
         </TouchableOpacity>
         {this.state.displayForm ? (<FlightForm searchFlights={this.searchFlightInfo.bind(this)} style={styles.flightForm}/>) : null}
+        {this.state.displayLoading ? (<Text style={styles.searching}>Searching...</Text>) : null}
         </View>
-        <FlightDisplays items={this.state.flightInfo}/>
+        {this.state.flightInfo === "No flights found." ? (<Text style={styles.noResults}>No flights found.</Text>) : <FlightDisplays items={this.state.flightInfo}/>}
       </View>
       )
   }
@@ -99,5 +112,17 @@ const styles = StyleSheet.create({
   },
   flightForm: {
     margin: 10
+  },
+  searching: {
+    color: "#35A8FF",
+    textAlign: "center",
+    margin: 20,
+    fontSize: 20
+  },
+  noResults: {
+    color: "#35A8FF",
+    textAlign: "center",
+    marginTop: 100,
+    fontSize: 18
   }
 });

@@ -111,12 +111,12 @@ const styles = StyleSheet.create({
     flex: 3
   },
   title: {
-    color: "lightblue",
+    color: "#35A8FF",
     fontSize: 25,
     fontWeight: "bold"
   },
   refresh: {
-    backgroundColor: "lightblue",
+    backgroundColor: "#35A8FF",
     flex: 1,
     margin: 15,
     padding: 10,
