@@ -1,8 +1,8 @@
-#BudgetBackpacker
+# BudgetBackpacker
 
 
 
-##About
+## About
 
 BudgetBackpacker is an iOS application that allows users to find the cheapest flight and hotel bookings.
 
@@ -10,15 +10,15 @@ Users can then save and organize their bookings for easy reference during their 
 
 Developed by Taylor George
 
-#App Demo
+# App Demo
 
 ![GIF OF DEMO](https://media.giphy.com/media/WUaZTAmEQSeSQt4aRk/giphy.gif)
 
-##Tech Stack
+## Tech Stack
 
 BudgetBackpacker was built using React Native. 
 
-##Technical Challenges
+## Technical Challenges
 
 BudgetBackpacker was built to meet a 48-hour deadline with no prior experience with React Native. I learned a great deal about working with React Native and with mobile environments in general. Some unexpected challenges included:
 
@@ -26,7 +26,7 @@ BudgetBackpacker was built to meet a 48-hour deadline with no prior experience w
     --Storing and displaying data sent to or retrieved from external APIs in the correct formats
     --Handling connecting flights within data objects
 
-##Minimum Viable Product
+## Minimum Viable Product
 
 The MVP version of BudgetBackpacker implements the following user stories:
 
@@ -44,7 +44,7 @@ The MVP version of BudgetBackpacker implements the following user stories:
     --As a user I should see my saved flights in chronological order for ease of reference during my trip.
     --As a user I should be able to delete a saved flight from my itinerary.
 
-##How the app works
+## How the app works
 
 BudgetBackpacker collects the data input into the Flight Search form and uses it to format a request to the Amadeus Flight Offers Price API. It uses the Aviation Edge Autocompletion Service API to convert the city names input by the user to their IATA codes for this request. The returned data is then formatted and displayed for the user.
 
