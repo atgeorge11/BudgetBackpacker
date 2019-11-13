@@ -1,7 +1,8 @@
-import React from 'react';
-import { Button, View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Alert } from 'react-native';
 import FlightConnectionItem from './FlightConnectionItem';
 import formatDate from './formatDate';
+import saveFunctions from '../saveFunctions/saveFunctions';
 
 export default FlightItem = props => {
     let flightRecord = {
@@ -30,26 +31,89 @@ export default FlightItem = props => {
             carrierCode: connection.flightSegment.carrierCode
         }
     })
+
+    const [saveScreen, toggleSaveScreen] = useState(false);
+
     return (
-        <View>
-            <View>
-                <Text>{flightRecord.price}</Text>
-            </View>
-            <View>
-                <View>
-                    <Text>Departure: {flightRecord.departure.airport}</Text>
-                    <Text>{formatDate(flightRecord.departure.time)}</Text>
+        <View style={styles.container}>
+            {/* <Modal
+                visible={saveScreen}
+                animationType={'slide'}
+                onRequestClose={() => toggleSaveScreen(false)}
+            >
+                <SaveFlight flight={flightRecord} closeModal={() => toggleSaveScreen(false)}/>
+            </Modal> */}
+            <TouchableOpacity
+                onPress={() => {
+                    saveFunctions.createRecord(flightRecord, (err) => {
+                        if (err) {
+                            Alert.alert("Save unsuccessful: " + err);
+                        } else {
+                            Alert.alert("Saved!");
+                        }
+                    })
+                }}
+            >
+                <View style={styles.initFlightItem}>
+                    <View style={styles.priceAndCarrier}>
+                        <Text style={styles.price}>${flightRecord.price}</Text>
+                        <Text style={styles.carrier}>{flightRecord.carrierCode}</Text>
+                    </View>
+                    <View style={styles.lines}>
+                        <View style={styles.subLine}>
+                            <Text style={styles.subLine1}>Departure: {flightRecord.departure.airport}</Text>
+                            <Text style={styles.subLine2}>{formatDate(flightRecord.departure.time)}</Text>
+                        </View>
+                        <View style={styles.subLine}>
+                            <Text style={styles.subLine1}>Arrival: {flightRecord.arrival.airport}</Text>
+                            <Text style={styles.subLine2}>{formatDate(flightRecord.arrival.time)}</Text>
+                        </View>
+                    </View>
                 </View>
-                <View>
-                    <Text>Arrival: {flightRecord.arrival.airport}</Text>
-                    <Text>{formatDate(flightRecord.arrival.time)}</Text>
-                </View>
-            </View>
-            {flightRecord.connections.map((item, index) => {
-                return (
-                    <FlightConnectionItem item={item} key={index}/>
-                )
-            })}
+                {flightRecord.connections.map((item, index) => {
+                    return (
+                        <FlightConnectionItem item={item} key={index}/>
+                    )
+                })}
+            </TouchableOpacity>
+
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        marginBottom: 20
+    },
+    initFlightItem: {
+        backgroundColor: "white",
+        borderRadius: 10,
+        margin: 10,
+        marginBottom: 0
+    },
+    priceAndCarrier: {
+        margin: 10,
+        flexDirection: "row",
+        alignItems: "stretch"
+    },
+    price: {
+        flex: 1,
+        color: "lightblue",
+        fontSize: 20,
+        fontWeight: "bold"
+    },
+    carrier: {
+        flex: 1,
+        fontWeight: "bold",
+        textAlign: "right"
+    },
+    lines: {
+        margin: 10
+    },
+    subLine: {
+        flexDirection: "row"
+    },
+    subLine1: {
+        fontWeight: "bold"
+    }
+})

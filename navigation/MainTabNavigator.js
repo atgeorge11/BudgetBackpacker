@@ -4,8 +4,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import SavedScreen from '../screens/SavedScreen';
+import HotelsScreen from '../screens/HotelsScreen';
 import FlightsScreen from '../screens/FlightsScreen';
 
 const config = Platform.select({
@@ -28,7 +28,7 @@ HomeStack.path = '';
 
 const HotelsStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Hotels: HotelsScreen,
   },
   config
 );
@@ -39,18 +39,18 @@ HotelsStack.navigationOptions = {
 
 HotelsStack.path = '';
 
-const SightsStack = createStackNavigator(
+const SavedStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Saved: SavedScreen,
   },
   config
 );
 
-SightsStack.navigationOptions = {
-  tabBarLabel: 'Sights',
+SavedStack.navigationOptions = {
+  tabBarLabel: 'Saved',
 };
 
-SightsStack.path = '';
+SavedStack.path = '';
 
 const FlightsStack = createStackNavigator(
   {
@@ -69,7 +69,7 @@ const tabNavigator = createBottomTabNavigator({
   HomeStack,
   FlightsStack,
   HotelsStack,
-  SightsStack
+  SavedStack
 });
 
 tabNavigator.path = '';
