@@ -30,7 +30,7 @@ BudgetBackpacker was built to meet a 48-hour deadline with no prior experience w
 
 The MVP version of BudgetBackpacker implements the following user stories:
 
-    * As a user I should be able to search for flights by:
+   * As a user I should be able to search for flights by:
         --departure location
         --arrival location
         --departure date
