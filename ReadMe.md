@@ -31,11 +31,11 @@ BudgetBackpacker was built to meet a 48-hour deadline with no prior experience w
 The MVP version of BudgetBackpacker implements the following user stories:
 
    * As a user I should be able to search for flights by:
-      --departure location
-      --arrival location
-      --departure date
-      --number of adult, child, infant, and senior passengers
-      --maximum price
+     * departure location
+     * arrival location
+     * departure date
+     * number of adult, child, infant, and senior passengers
+     * maximum price
    * As a user I should be able to easily prioritize pricing in my search.
    * As a user I should be able to easily distinguish sets of connecting flights in my search results.
    * As a user I should be able to easily compare flights by price and time.
